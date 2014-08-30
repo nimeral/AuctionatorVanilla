@@ -82,10 +82,10 @@ end
 
 function Auctionator_OnAddonLoaded()
 	
+		Auctionator_SetupHookFunctions ();
+				
 		Auctionator_AddSellTab ();
 		Auctionator_AddSellPanel ();
-		
-		Auctionator_SetupHookFunctions ();
 		
 		auctionsTabElements[1]  = AuctionsScrollFrame;
 		auctionsTabElements[2]  = AuctionsButton1;
@@ -273,29 +273,42 @@ end
 function Auctionator_AddSellPanel ()
 	
 	local frame = CreateFrame("Frame", "Auctionator_Sell_Panel", AuctionFrame, "Auctionator_Sell_Template");
+	--frame:SetParent("AuctionFrame");
+	--frame:SetPoint("TOPLEFT", "AuctionFrame", "TOPLEFT", 0, 0);
+	--relevel(frame);
 	frame:Hide();
-
+	
 end
 
 -----------------------------------------
 
 function Auctionator_AddSellTab ()
-	
+		
 	local n = 4;
 	
 	AUCTIONATOR_TAB_INDEX = n;
 
 	local framename = "AuctionFrameTab"..n;
 
-	local frame = CreateFrame("Button", framename, AuctionFrame, "FriendsFrameTabTemplate");
+	local frame = CreateFrame("Button", framename, AuctionFrame, "CharacterFrameTabButtonTemplate");
 
+	setglobal("AuctionFrameTab4", frame);
 	frame:SetID(n);
+	--frame:SetParent("FriendsFrameTabTemplate");
 	frame:SetText("Auctionator");
-
 	frame:SetPoint("LEFT", getglobal("AuctionFrameTab"..n-1), "RIGHT", -8, 0);
+	frame:Show();
 
+	--Attempting to index local 'frame' now
+	
+	-- Configure the tab button.
+	--setglobal(AuctionFrameTab4, AuctionFrameTab4);
+	
+	--tabButton:SetPoint("TOPLEFT", getglobal("AuctionFrameTab"..(tabIndex - 1)):GetName(), "TOPRIGHT", -8, 0);
+	--tabButton:SetID(tabIndex);
+	
 	PanelTemplates_SetNumTabs (AuctionFrame, n);
-	PanelTemplates_EnableTab  (AuctionFrame, n);
+	--PanelTemplates_EnableTab  (AuctionFrame, n);
 end
 
 -----------------------------------------
@@ -987,6 +1000,14 @@ function SubType2AuctionSubclass(auctionClass, itemSubtype)
 	end
 end
 
+function relevel(frame) --Local
+	local myLevel = frame:GetFrameLevel() + 1
+	local children = { frame:GetChildren() }
+	for _,child in pairs(children) do
+		child:SetFrameLevel(myLevel)
+		relevel(child)
+	end
+end
 
 
 

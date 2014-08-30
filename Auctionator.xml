@@ -17,8 +17,9 @@
 			this:RegisterEvent("AUCTION_HOUSE_CLOSED");
 			this:RegisterEvent("NEW_AUCTION_UPDATE");
 			
-			this.TimeSinceLastUpdate = 0;
-			this.NumIdles = 0;
+			self = {};
+			self.TimeSinceLastUpdate = 0;
+			self.NumIdles = 0;
          </OnLoad>
 		<OnUpdate>
 			Auctionator_OnUpdate(self, elapsed);
