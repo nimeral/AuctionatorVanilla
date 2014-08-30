@@ -84,7 +84,7 @@ function Auctionator_OnAddonLoaded()
 	
 		--Auctionator_AddSellTab ();
 		--Auctionator_AddSellPanel ();
-		insertAHTab (4, FriendsFrameTabTemplate, AuctionFrameTab4);
+		insertAHTab (4, FriendsFrameTabTemplate, Auctionator_Sell_Template);
 		
 		Auctionator_SetupHookFunctions ();
 		
@@ -1029,86 +1029,7 @@ function insertAHTab(tabIndex, tabButton, tabFrame)
 	PanelTemplates_SetNumTabs(AuctionFrame, tabCount)
 end
 
-local lAHConfigPending = true
-function configureAH()
-	if (lAHConfigPending and IsAddOnLoaded("Blizzard_AuctionUI")) then
-		EnhTooltip.DebugPrint("Configuring AuctionUI");
-		AuctionsPriceText:ClearAllPoints();
-		AuctionsPriceText:SetPoint("TOPLEFT", "AuctionsItemText", "TOPLEFT", 0, -53);
-		AuctionsBuyoutText:ClearAllPoints();
-		AuctionsBuyoutText:SetPoint("TOPLEFT", "AuctionsPriceText", "TOPLEFT", 0, -33);
-		AuctionsBuyoutErrorText:ClearAllPoints();
-		AuctionsBuyoutErrorText:SetPoint("TOPLEFT", "AuctionsBuyoutText", "TOPLEFT", 0, -29);
-		AuctionsDurationText:ClearAllPoints();
-		AuctionsDurationText:SetPoint("TOPLEFT", "AuctionsBuyoutErrorText", "TOPLEFT", 0, -7);
-		AuctionsDepositText:ClearAllPoints();
-		AuctionsDepositText:SetPoint("TOPLEFT", "AuctionsDurationText", "TOPLEFT", 0, -31);
-		if (AuctionInfo ~= nil) then
-			AuctionInfo:ClearAllPoints();
-			AuctionInfo:SetPoint("TOPLEFT", "AuctionsDepositText", "TOPLEFT", -4, -33);
-		end
 
-		AuctionsShortAuctionButtonText:SetText("2");
-		AuctionsMediumAuctionButton:SetPoint("TOPLEFT", "AuctionsDurationText", "BOTTOMLEFT", 3, 1);
-		AuctionsMediumAuctionButtonText:SetText("8");
-		AuctionsMediumAuctionButton:ClearAllPoints();
-		AuctionsMediumAuctionButton:SetPoint("BOTTOMLEFT", "AuctionsShortAuctionButton", "BOTTOMRIGHT", 20,0);
-		AuctionsLongAuctionButtonText:SetText("24 "..HOURS);
-		AuctionsLongAuctionButton:ClearAllPoints();
-		AuctionsLongAuctionButton:SetPoint("BOTTOMLEFT", "AuctionsMediumAuctionButton", "BOTTOMRIGHT", 20,0);
 
-		-- set UI-texts
-		BrowseScanButton:SetText(_AUCT('TextScan'));
-		BrowseScanButton:SetParent("AuctionFrameBrowse");
-		BrowseScanButton:SetPoint("LEFT", "AuctionFrameMoneyFrame", "RIGHT", 5,0);
-		BrowseScanButton:Show();
 
-		if (AuctionInfo) then
-			AuctionInfo:SetParent("AuctionFrameAuctions")
-			AuctionInfo:SetPoint("TOPLEFT", "AuctionsDepositText", "TOPLEFT", -4, -51)
-			AuctionInfo:Show()
 
-			AuctPriceRemember:SetParent("AuctionFrameAuctions")
-			AuctPriceRemember:SetPoint("TOPLEFT", "AuctionsDepositText", "BOTTOMLEFT", 0, -6)
-			AuctPriceRemember:Show()
-			AuctPriceRememberText:SetText(_AUCT('GuiRememberText'))
-			AuctPriceRememberCheck:SetParent("AuctionFrameAuctions")
-			AuctPriceRememberCheck:SetPoint("TOPLEFT", "AuctionsDepositText", "BOTTOMLEFT", 0, -2)
-			AuctPriceRememberCheck:Show()
-		end
-
-		-- Protect the auction frame from being closed.
-		-- This call is to ensure the window is protected even after you
-		-- manually load Auctioneer while already showing the AuctionFrame
-		if (Auctioneer.Command.GetFilterVal('protect-window') == 2) then
-			Auctioneer.Util.ProtectAuctionFrame(true);
-		end
-
-		Auctioneer.Core.HookAuctionHouse()
-		AuctionFrameFilters_UpdateClasses()
-		lAHConfigPending = nil
-
-		-- Count the number of auction house tabs
-		local tabCount = 0;
-		while (getglobal("AuctionFrameTab"..(tabCount + 1)) ~= nil) do
-			tabCount = tabCount + 1;
-		end
-
-		-- Find the correct location to insert our Search Auctions and Post Auctions
-		-- tabs. We want to insert them at the end or before BeanCounter's
-		-- Transactions tab.
-		local tabIndex = 1;
-		while (getglobal("AuctionFrameTab"..(tabIndex)) ~= nil and
-			   getglobal("AuctionFrameTab"..(tabIndex)):GetName() ~= "AuctionFrameTabTransactions") do
-			tabIndex = tabIndex + 1;
-		end
-		
-		--insertAHTab(tabIndex, AuctionFrameTabSearch, AuctionFrameSearch);
-		insertAHTab (tabIndex, FriendsFrameTabTemplate, AuctionFrameTab4);
-		
-		if (not AuctionUI_Hooked) then
-			Stubby.RegisterFunctionHook("AuctionFrameTab_OnClick", 200, AuctioneerUI_AuctionFrameTab_OnClickHook)
-			AuctionUI_Hooked = true
-		end
-	end
-end
