@@ -81,8 +81,6 @@ end
 -----------------------------------------
 
 function Auctionator_OnAddonLoaded()
-
-	if (arg1:lower() == "blizzard_auctionui") then
 	
 		Auctionator_AddSellTab ();
 		Auctionator_AddSellPanel ();
@@ -113,7 +111,6 @@ function Auctionator_OnAddonLoaded()
 		recommendElements[6] = getglobal ("Auctionator_Recommend_Basis_Text");
 		recommendElements[7] = getglobal ("Auctionator_RecommendItem_Tex");
 
-	end
 end
 
 
@@ -284,7 +281,7 @@ end
 
 function Auctionator_AddSellTab ()
 	
-	local n = AuctionFrame.numTabs+1;
+	local n = 4;
 	
 	AUCTIONATOR_TAB_INDEX = n;
 
