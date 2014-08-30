@@ -82,9 +82,8 @@ end
 
 function Auctionator_OnAddonLoaded()
 	
-		--Auctionator_AddSellTab ();
-		--Auctionator_AddSellPanel ();
-		insertAHTab (4, FriendsFrameTabTemplate, Auctionator_Sell_Template);
+		Auctionator_AddSellTab ();
+		Auctionator_AddSellPanel ();
 		
 		Auctionator_SetupHookFunctions ();
 		
@@ -291,7 +290,7 @@ function Auctionator_AddSellTab ()
 	local frame = CreateFrame("Button", framename, AuctionFrame, "FriendsFrameTabTemplate");
 
 	frame:SetID(n);
-	frame:SetText("VanillaAuctionator");
+	frame:SetText("Auctionator");
 
 	frame:SetPoint("LEFT", getglobal("AuctionFrameTab"..n-1), "RIGHT", -8, 0);
 
@@ -988,46 +987,6 @@ function SubType2AuctionSubclass(auctionClass, itemSubtype)
 	end
 end
 
-function insertAHTab(tabIndex, tabButton, tabFrame)
-	-- Count the number of auction house tabs (including the tab we are going
-	-- to insert).
-	local tabCount = 1;
-	while (getglobal("AuctionFrameTab"..(tabCount)) ~= nil) do
-		tabCount = tabCount + 1;
-	end
-
-	-- Adjust the tabIndex to fit within the current tab count.
-	if (tabIndex < 1 or tabIndex > tabCount) then
-		tabIndex = tabCount;
-	end
-
-	-- Make room for the tab, if needed.
-	for index = tabCount, tabIndex + 1, -1  do
-		setglobal("AuctionFrameTab"..(index), getglobal("AuctionFrameTab"..(index - 1)));
-		getglobal("AuctionFrameTab"..(index)):SetID(index);
-	end
-
-	-- Configure the frame.
-	--tabFrame:SetParent("AuctionFrame");
-	tabFrame:SetPoint("TOPLEFT", "AuctionFrame", "TOPLEFT", 0, 0);
-	relevel(tabFrame);
-
-	-- Configure the tab button.
-	setglobal("AuctionFrameTab"..tabIndex, tabButton);
-	tabButton:SetParent("AuctionFrame");
-	tabButton:SetPoint("TOPLEFT", getglobal("AuctionFrameTab"..(tabIndex - 1)):GetName(), "TOPRIGHT", -8, 0);
-	tabButton:SetID(tabIndex);
-	tabButton:Show();
-
-	-- If we inserted a tab in the middle, adjust the layout of the next tab button.
-	if (tabIndex < tabCount) then
-		nextTabButton = getglobal("AuctionFrameTab"..(tabIndex + 1));
-		nextTabButton:SetPoint("TOPLEFT", tabButton:GetName(), "TOPRIGHT", -8, 0);
-	end
-
-	-- Update the tab count.
-	PanelTemplates_SetNumTabs(AuctionFrame, tabCount)
-end
 
 
 

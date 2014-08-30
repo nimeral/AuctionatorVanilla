@@ -602,25 +602,4 @@
 
 	</Frame>
 	
-	<Frame name="Auctionator_Sell_Panel" toplevel="true" parent = "AuctionFrame" inherits="Auctionator_Sell_Template" enableMouse="true" hidden="true">
-	
-	</Frame>
-	
-	<Button name="AuctionFrameTab4" inherits="FriendsFrameTabTemplate" hidden="false">
-		<Scripts>
-			<OnLoad>
-			local n = 4;
-			
-			AUCTIONATOR_TAB_INDEX = n;
-			
-			this:SetID(n);
-			this:SetText("AuctionatorTabButton");
-			this:SetPoint("LEFT", getglobal("AuctionFrameTab"..n-1), "RIGHT", -8, 0);
-			
-			PanelTemplates_SetNumTabs (AuctionFrame, n);
-			PanelTemplates_EnableTab  (AuctionFrame, n);
-			</OnLoad>
-		</Scripts>
-	</Button>
-	
 </Ui>
