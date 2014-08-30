@@ -287,7 +287,7 @@ function Auctionator_AddSellTab ()
 
 	local framename = "AuctionFrameTab"..n;
 
-	local frame = CreateFrame("Button", framename, AuctionFrame, "AuctionTabTemplate");
+	local frame = CreateFrame("Button", framename, AuctionFrame, "FriendsFrameTabTemplate");
 
 	frame:SetID(n);
 	frame:SetText("Auctionator");
