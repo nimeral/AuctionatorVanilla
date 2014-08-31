@@ -124,7 +124,8 @@ function Auctionator_AuctionFrameTab_OnClick (index)
 	end
 
 	getglobal("Auctionator_Sell_Template"):Hide();
-
+	
+	chatmsg ("Now tab is "..index);
 
 	if (index == 3) then		
 		Auctionator_ShowElems (auctionsTabElements);
@@ -136,6 +137,7 @@ function Auctionator_AuctionFrameTab_OnClick (index)
 		forceMsgAreaUpdate = true;
 		
 	elseif (index == AUCTIONATOR_TAB_INDEX) then
+		chatmsg ("Trying to tab to auctionator...");
 		AuctionFrameTab_OnClick(3);
 		
 		PanelTemplates_SetTab(AuctionFrame, AUCTIONATOR_TAB_INDEX);
@@ -338,10 +340,12 @@ end
 function Auctionator_OnAuctionUpdate ()
 
 	if (processing_state ~= KM_POSTQUERY) then
+		chatmsg ("No KM_POSTQUERY so no Auctionator_OnAuctionUpdate actually");
 		return;
 	end
 	
 	if (PanelTemplates_GetSelectedTab (AuctionFrame) ~= AUCTIONATOR_TAB_INDEX) then
+		chatmsg ("Selected tab !="..AUCTIONATOR_TAB_INDEX.."so no Auctionator_OnAuctionUpdate actually");
 		return;
 	end;
 	
@@ -349,7 +353,7 @@ function Auctionator_OnAuctionUpdate ()
 	
 	local numBatchAuctions, totalAuctions = GetNumAuctionItems("list");
 	
---	chatmsg("auctions:"..numBatchAuctions.." out of  "..totalAuctions)
+    chatmsg("auctions:"..numBatchAuctions.." out of  "..totalAuctions)
 
 	if (totalAuctions >= 50) then
 		Auctionator_SetMessage ("Scanning auctions: page "..current_page);
@@ -386,8 +390,7 @@ function Auctionator_OnAuctionUpdate ()
 		
 	else
 	
-		
-		if (scandata.n > 0) then
+		if (table.getn (scandata) > 0) then
 			Auctionator_Process_Scandata ();
 			Auctionator_CalcBaseData();
 		else
@@ -464,7 +467,6 @@ function Auctionator_Process_Scandata ()
 		n = n + 1;
 	end
 	
-	--sorteddata.n = n;
 
 	table.sort (sorteddata, function(a,b) return a.itemPrice < b.itemPrice; end);
 
@@ -609,10 +611,13 @@ function Auctionator_Idle(self, elapsed)
 		------- check whether to send a new auction query to get the next page -------
 
 		if (processing_state == KM_PREQUERY) then
+			chatmsg ("KM_PREQUERY...");
 			if (CanSendAuctionQuery()) then
 				processing_state = KM_IN_QUERY;
+				chatmsg ("KM_IN_QUERY...");
 				QueryAuctionItems (currentAuctionItemName, "", "", nil, currentAuctionClass, currentAuctionSubclass, current_page, nil, nil);
 				processing_state = KM_POSTQUERY;
+				chatmsg ("KM_POSTQUERY!");
 				current_page = current_page + 1;
 			end
 		end
@@ -629,7 +634,8 @@ function Auctionator_Idle(self, elapsed)
 
 	if (currentAuctionItemName ~= auctionItemName or currentAuctionStackSize ~= auctionCount or self.NumIdles == 1 or forceMsgAreaUpdate) then
 	
-		chatmsg ("self.NumIdles == 1 or forceMsgAreaUpdate");
+		if (self.NumIdles == 1) then chatmsg ("self.NumIdles == 1"); end
+		if (forceMsgAreaUpdate) then chatmsg ("forceMsgAreaUpdate"); end
 		
 		forceMsgAreaUpdate = false;
 		
@@ -659,7 +665,7 @@ function Auctionator_Idle(self, elapsed)
 			local sName, sLink, iRarity, iLevel, iMinLevel, sType, sSubType, iStackCount = GetItemInfo(currentAuctionItemName);
 		
 			currentAuctionClass		= ItemType2AuctionClass (sType);
-			currentAuctionSubclass	= SubType2AuctionSubclass (currentAuctionClass, sSubType);
+			currentAuctionSubclass	= "Guns"--Oh, no one's looking! SubType2AuctionSubclass (currentAuctionClass, sSubType);
 
 			SortAuctionItems("list", "buyout");
 
@@ -669,6 +675,7 @@ function Auctionator_Idle(self, elapsed)
 		 
 			current_page = 0;
 			processing_state = KM_PREQUERY;
+			chatmsg ("Just KM_PREQUERY in Auctionator_Idle");
 
 			scandata = {};
 		end
@@ -685,7 +692,7 @@ function Auctionator_ScrollbarUpdate()
 	local line;				-- 1 through 12 of our window to scroll
 	local dataOffset;		-- an index into our data calculated from the scroll offset
 
-	local numrows = sorteddata.n;
+	local numrows = table.getn (sorteddata);
 
 	if (numrows == nil) then
 		chatmsg ("numrows set to 0")
@@ -988,21 +995,22 @@ end
 
 function ItemType2AuctionClass(itemType)
 	local itemClasses = { GetAuctionItemClasses() };
-	if itemClasses.n > 0 then
-	local itemClass;
-		for x, itemClass in pairs(itemClasses) do
-			if (itemClass == itemType) then
-				return x;
+	if (itemClasses ~= nil) then
+		if table.getn (itemClasses) > 0 then
+		local itemClass;
+			for x, itemClass in pairs(itemClasses) do
+				if (itemClass == itemType) then
+					return x;
+				end
 			end
 		end
-	end
+	else chatmsg ("Can't GetAuctionItemClasses"); end
 end
-
 
 -----------------------------------------
 
 function SubType2AuctionSubclass(auctionClass, itemSubtype)
-	local itemClasses = { GetAuctionItemSubClasses(auctionClass) };
+	local itemClasses = { GetAuctionItemSubClasses(auctionClass.number) };
 	if itemClasses.n > 0 then
 	local itemClass;
 		for x, itemClass in pairs(itemClasses) do
