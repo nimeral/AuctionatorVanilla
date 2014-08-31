@@ -45,7 +45,7 @@
 						<Scripts>
 							<OnLoad>
 								SmallMoneyFrame_OnLoad();
-								MoneyFrame_SetType("AUCTION");
+								MoneyFrame_SetType("STATIC");
 							</OnLoad>
 						</Scripts>
 					</Frame>
@@ -323,7 +323,7 @@
 						FauxScrollFrame_OnVerticalScroll(16, Auctionator_ScrollbarUpdate); 
 					</OnVerticalScroll>
 					<OnShow>
-						Auctionator_ScrollbarUpdate();
+						<!--Auctionator_ScrollbarUpdate();-->
 					</OnShow>
 				</Scripts>
 			</ScrollFrame>

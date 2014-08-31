@@ -419,6 +419,7 @@ function Auctionator_Process_Scandata ()
 	sorteddata = {};
 	
 	if (scandata == nil) then
+		chatmsg ("No scandata to sort");
 		return;
 	end;
    
@@ -627,6 +628,8 @@ function Auctionator_Idle(self, elapsed)
 	end
 
 	if (currentAuctionItemName ~= auctionItemName or currentAuctionStackSize ~= auctionCount or self.NumIdles == 1 or forceMsgAreaUpdate) then
+	
+		chatmsg ("self.NumIdles == 1 or forceMsgAreaUpdate");
 		
 		forceMsgAreaUpdate = false;
 		
@@ -685,7 +688,8 @@ function Auctionator_ScrollbarUpdate()
 	local numrows = sorteddata.n;
 
 	if (numrows == nil) then
-		chatmsg ("FauxScrollFrame_Update will never work")
+		chatmsg ("numrows set to 0")
+		numrows = 0
 	end
 		
 	FauxScrollFrame_Update (AuctionatorScrollFrame, numrows, 12, 16);
