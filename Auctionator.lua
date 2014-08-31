@@ -81,11 +81,11 @@ end
 -----------------------------------------
 
 function Auctionator_OnAddonLoaded()
-	
-		Auctionator_SetupHookFunctions ();
 				
 		Auctionator_AddSellTab ();
 		Auctionator_AddSellPanel ();
+		
+		Auctionator_SetupHookFunctions ();
 		
 		auctionsTabElements[1]  = AuctionsScrollFrame;
 		auctionsTabElements[2]  = AuctionsButton1;
@@ -123,7 +123,7 @@ function Auctionator_AuctionFrameTab_OnClick (index)
 		index = this:GetID();
 	end
 
-	getglobal("Auctionator_Sell_Panel"):Hide();
+	getglobal("Auctionator_Sell_Template"):Hide();
 
 
 	if (index == 3) then		
@@ -149,7 +149,7 @@ function Auctionator_AuctionFrameTab_OnClick (index)
 
 		Auctionator_HideElems (auctionsTabElements);
 		
-		getglobal("Auctionator_Sell_Panel"):Show();
+		getglobal("Auctionator_Sell_Template"):Show();
 
 		Auctionator_HideElems (recommendElements);
 
@@ -272,11 +272,11 @@ end
 
 function Auctionator_AddSellPanel ()
 	
-	local frame = CreateFrame("Frame", "Auctionator_Sell_Panel", AuctionFrame, "Auctionator_Sell_Template");
+--	local frame = CreateFrame("Frame", "Auctionator_Sell_Panel", AuctionFrame, "Auctionator_Sell_Template");
 	--frame:SetParent("AuctionFrame");
 	--frame:SetPoint("TOPLEFT", "AuctionFrame", "TOPLEFT", 0, 0);
 	--relevel(frame);
-	frame:Hide();
+--	frame:Hide();
 	
 end
 
@@ -308,7 +308,7 @@ function Auctionator_AddSellTab ()
 	--tabButton:SetID(tabIndex);
 	
 	PanelTemplates_SetNumTabs (AuctionFrame, n);
-	--PanelTemplates_EnableTab  (AuctionFrame, n);
+	PanelTemplates_EnableTab  (AuctionFrame, n);
 end
 
 -----------------------------------------
@@ -378,13 +378,15 @@ function Auctionator_OnAuctionUpdate ()
 		end
 	end
 
-
+	chatmsg ("In the center of auction update");
+	
 	if (numBatchAuctions == 50) then
 				
 		processing_state = KM_PREQUERY;	
 		
 	else
 	
+		
 		if (scandata.n > 0) then
 			Auctionator_Process_Scandata ();
 			Auctionator_CalcBaseData();
@@ -424,6 +426,7 @@ function Auctionator_Process_Scandata ()
 
 	local i,sd;
 	local conddata = {};
+	chatmsg ("Processing scandata");
 
 	for i,sd in ipairs (scandata) do
 	
@@ -459,6 +462,8 @@ function Auctionator_Process_Scandata ()
 		sorteddata[n] = v;
 		n = n + 1;
 	end
+	
+	--sorteddata.n = n;
 
 	table.sort (sorteddata, function(a,b) return a.itemPrice < b.itemPrice; end);
 
@@ -588,7 +593,7 @@ end
 
 function Auctionator_Idle(self, elapsed)
 
-	self.TimeSinceLastUpdate = self.TimeSinceLastUpdate + elapsed;
+	self.TimeSinceLastUpdate = self.TimeSinceLastUpdate + 0.1;--elapsed;
 	
 	if (AuctionatorMessage == nil) then
 		return;
@@ -679,6 +684,10 @@ function Auctionator_ScrollbarUpdate()
 
 	local numrows = sorteddata.n;
 
+	if (numrows == nil) then
+		chatmsg ("FauxScrollFrame_Update will never work")
+	end
+		
 	FauxScrollFrame_Update (AuctionatorScrollFrame, numrows, 12, 16);
 
 	for line = 1,12 do
@@ -747,7 +756,7 @@ end
 function AuctionatorMoneyFrame_OnLoad()
 
 	this.small = 1;
-	MoneyFrame_SetType("AUCTION");
+	MoneyFrame_SetType("STATIC");
 end
 
 -----------------------------------------

@@ -101,7 +101,7 @@
 	</Button>
 
 
-	<Frame name="Auctionator_Sell_Template" virtual="true">
+	<Frame name="Auctionator_Sell_Template" virtual="false" hidden = "true">
 		<Size>
 			<AbsDimension x="548" y="447"/>
 		</Size>
