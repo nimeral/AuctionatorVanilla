@@ -101,7 +101,7 @@
 	</Button>
 
 
-	<Frame name="Auctionator_Sell_Template" hidden = "true" parent = "AuctionFrame">
+	<Frame name="Auctionator_Sell_Template" toplevel="true" hidden = "true" parent = "AuctionFrame">
 		<Size>
 			<AbsDimension x="548" y="447"/>
 		</Size>
@@ -120,7 +120,7 @@
 				</FontString>
 
 				<FontString name="AuctionatorMessage" inherits="GameFontNormal">
-					<Anchors><Anchor point="TOP"><Offset><AbsDimension x="8" y="-70"/></Offset></Anchor></Anchors>
+					<Anchors><Anchor point="TOP"><Offset><AbsDimension x="8" y="-100"/></Offset></Anchor></Anchors>
 				</FontString>
 
 
@@ -190,7 +190,7 @@
 			<Button>
 				<Size><AbsDimension y="118" /></Size>
 				<Anchors>
-					<Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="-72"/></Offset></Anchor>
+					<Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="-2"/></Offset></Anchor>
 					<Anchor point="RIGHT"><Offset><AbsDimension x="63"/></Offset></Anchor>
 				</Anchors>
 				<Layers>

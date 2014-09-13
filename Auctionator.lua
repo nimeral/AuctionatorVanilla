@@ -102,6 +102,8 @@ function Auctionator_OnAddonLoaded()
 		auctionsTabElements[13] = AuctionsHighBidderSort;
 		auctionsTabElements[14] = AuctionsBidSort;
 		auctionsTabElements[15] = AuctionsCancelAuctionButton;
+		--auctionsTabElements[16] = AuctionFrameAuctions;
+		--auctionsTabElements[16] = AuctionFrame;
 
 		recommendElements[1] = getglobal ("Auctionator_Recommend_Text");
 		recommendElements[2] = getglobal ("Auctionator_RecommendPerItem_Text");
@@ -110,7 +112,7 @@ function Auctionator_OnAddonLoaded()
 		recommendElements[5] = getglobal ("Auctionator_RecommendPerStack_Price");
 		recommendElements[6] = getglobal ("Auctionator_Recommend_Basis_Text");
 		recommendElements[7] = getglobal ("Auctionator_RecommendItem_Tex");
-
+		
 end
 
 
@@ -140,22 +142,24 @@ function Auctionator_AuctionFrameTab_OnClick (index)
 		chatmsg ("Trying to tab to auctionator...");
 		AuctionFrameTab_OnClick(3);
 		
+		
 		PanelTemplates_SetTab(AuctionFrame, AUCTIONATOR_TAB_INDEX);
 		chatmsg (this:GetID ())
 		
-		-- AuctionFrameTopLeft:SetTexture	("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-TopLeft");
+		-- AuctionFrameTopLeft:SetTexture	("");
 		-- AuctionFrameTop:SetTexture		("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-Top");
-		-- AuctionFrameTopRight:SetTexture	("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-TopRight");
+		-- AuctionFrameTopRight:SetTexture	("");
 		-- AuctionFrameBotLeft:SetTexture	("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-BotLeft");
-		-- AuctionFrameBot:SetTexture		("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-Bot");
-		-- AuctionFrameBotRight:SetTexture	("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-BotRight");
+		-- AuctionFrameBot:SetTexture		("");
+		-- AuctionFrameBotRight:SetTexture	("");
 
 		Auctionator_HideElems (auctionsTabElements);
 		
-		getglobal("Auctionator_Sell_Template"):Show();
-
 		Auctionator_HideElems (recommendElements);
-
+		
+		getglobal("Auctionator_Sell_Template"):Show();
+		AuctionFrame:EnableMouse(false);
+		
 		OpenAllBags(true);
 		
 		if (currentAuctionItemName ~= "") then
@@ -577,6 +581,7 @@ end
 
 function Auctionator_OnAuctionHouseClosed()
 
+	chatmsg ("AH closed!");
 	AuctionatorOptionsFrame:Hide();
 	AuctionatorDescriptionFrame:Hide();
 	Auctionator_Sell_Template:Hide();
