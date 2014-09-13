@@ -126,8 +126,6 @@ function Auctionator_AuctionFrameTab_OnClick (index)
 	getglobal("Auctionator_Sell_Template"):Hide();
 	
 	chatmsg ("Now tab is "..index..". AUCTIONATOR_TAB_INDEX = "..AUCTIONATOR_TAB_INDEX);
-	chatmsg (this)
-	if (index == 2) then index = 4 end
 
 	if (index == 3) then		
 		Auctionator_ShowElems (auctionsTabElements);
@@ -145,12 +143,12 @@ function Auctionator_AuctionFrameTab_OnClick (index)
 		PanelTemplates_SetTab(AuctionFrame, AUCTIONATOR_TAB_INDEX);
 		chatmsg (this:GetID ())
 		
-		AuctionFrameTopLeft:SetTexture	("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-TopLeft");
-		AuctionFrameTop:SetTexture		("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-Top");
-		AuctionFrameTopRight:SetTexture	("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-TopRight");
-		AuctionFrameBotLeft:SetTexture	("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-BotLeft");
-		AuctionFrameBot:SetTexture		("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-Bot");
-		AuctionFrameBotRight:SetTexture	("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-BotRight");
+		-- AuctionFrameTopLeft:SetTexture	("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-TopLeft");
+		-- AuctionFrameTop:SetTexture		("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-Top");
+		-- AuctionFrameTopRight:SetTexture	("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-TopRight");
+		-- AuctionFrameBotLeft:SetTexture	("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-BotLeft");
+		-- AuctionFrameBot:SetTexture		("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-Bot");
+		-- AuctionFrameBotRight:SetTexture	("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-BotRight");
 
 		Auctionator_HideElems (auctionsTabElements);
 		
@@ -295,7 +293,7 @@ function Auctionator_AddSellTab ()
 
 	local framename = "AuctionFrameTab"..n;
 
-	local frame = CreateFrame("Button", framename, AuctionFrame, "CharacterFrameTabButtonTemplate");
+	local frame = CreateFrame("Button", framename, AuctionFrame, "AuctionTabTemplate");
 
 	setglobal("AuctionFrameTab4", frame);
 	frame:SetID(n);
