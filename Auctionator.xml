@@ -101,7 +101,7 @@
 	</Button>
 
 
-	<Frame name="Auctionator_Sell_Template" virtual="false" hidden = "true">
+	<Frame name="Auctionator_Sell_Template" hidden = "true" parent = "AuctionFrame">
 		<Size>
 			<AbsDimension x="548" y="447"/>
 		</Size>
@@ -120,7 +120,7 @@
 				</FontString>
 
 				<FontString name="AuctionatorMessage" inherits="GameFontNormal">
-					<Anchors><Anchor point="TOP"><Offset><AbsDimension x="8" y="-100"/></Offset></Anchor></Anchors>
+					<Anchors><Anchor point="TOP"><Offset><AbsDimension x="8" y="-70"/></Offset></Anchor></Anchors>
 				</FontString>
 
 
@@ -221,10 +221,7 @@
 						AuctionsFrameAuctions_ValidateAuction();
 					</OnReceiveDrag>
 					<OnEnter>
-						local infoType = GetCursorInfo();
-						if (infoType == "item") then
-							Auctionator_Hilite1:Show();
-						end;
+						Auctionator_Hilite1:Show();
 					</OnEnter>
 					<OnLeave>
 						Auctionator_Hilite1:Hide();

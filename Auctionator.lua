@@ -127,6 +127,7 @@ function Auctionator_AuctionFrameTab_OnClick (index)
 	
 	chatmsg ("Now tab is "..index..". AUCTIONATOR_TAB_INDEX = "..AUCTIONATOR_TAB_INDEX);
 	chatmsg (this)
+	if (index == 2) then index = 4 end
 
 	if (index == 3) then		
 		Auctionator_ShowElems (auctionsTabElements);
@@ -142,6 +143,7 @@ function Auctionator_AuctionFrameTab_OnClick (index)
 		AuctionFrameTab_OnClick(3);
 		
 		PanelTemplates_SetTab(AuctionFrame, AUCTIONATOR_TAB_INDEX);
+		chatmsg (this:GetID ())
 		
 		AuctionFrameTopLeft:SetTexture	("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-TopLeft");
 		AuctionFrameTop:SetTexture		("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-Top");
@@ -154,7 +156,7 @@ function Auctionator_AuctionFrameTab_OnClick (index)
 		
 		getglobal("Auctionator_Sell_Template"):Show();
 
-		Auctionator_ShowElems (recommendElements);
+		Auctionator_HideElems (recommendElements);
 
 		OpenAllBags(true);
 		
@@ -579,6 +581,7 @@ function Auctionator_OnAuctionHouseClosed()
 
 	AuctionatorOptionsFrame:Hide();
 	AuctionatorDescriptionFrame:Hide();
+	Auctionator_Sell_Template:Hide();
 	
 end
 
