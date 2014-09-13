@@ -35,13 +35,13 @@ local sorteddata = {};
 local basedata;
 
 local currentAuctionItemName = "";
-local currentAuctionStackSize = 0;
+local currentAuctionStackSize = 1;
 local currentAuctionTexture = nil;
 
 local currentAuctionClass;
 local currentAuctionSubclass;
 
-local auctionator_last_buyoutprice;
+local auctionator_last_buyoutprice = 1;
 local auctionator_last_item_posted = nil;
 local auctionator_pending_message = nil;
 
