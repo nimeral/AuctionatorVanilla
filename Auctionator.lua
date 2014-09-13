@@ -125,8 +125,7 @@ function Auctionator_AuctionFrameTab_OnClick (index)
 
 	getglobal("Auctionator_Sell_Template"):Hide();
 	
-	chatmsg ("Now tab is "..index..". AUCTIONATOR_TAB_INDEX = "..AUCTIONATOR_TAB_INDEX);
-	chatmsg (this)
+	chatmsg ("Now tab is "..index);
 
 	if (index == 3) then		
 		Auctionator_ShowElems (auctionsTabElements);
@@ -154,7 +153,7 @@ function Auctionator_AuctionFrameTab_OnClick (index)
 		
 		getglobal("Auctionator_Sell_Template"):Show();
 
-		Auctionator_ShowElems (recommendElements);
+		Auctionator_HideElems (recommendElements);
 
 		OpenAllBags(true);
 		
