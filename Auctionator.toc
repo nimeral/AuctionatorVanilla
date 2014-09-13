@@ -2,4 +2,7 @@
 ## Title: Auctionator
 ## Notes: A lightweight addon designed to help manage auctions
 ## SavedVariablesPerCharacter: AUCTIONATOR_ENABLE_ALT, AUCTIONATOR_OPEN_FIRST
+
+..\Blizzard_AuctionUI\Blizzard_AuctionUITemplates.xml
+
 Auctionator.xml
