@@ -128,9 +128,7 @@ function Auctionator_AuctionFrameTab_OnClick (index)
 
 	getglobal("Auctionator_Sell_Template"):Hide();
 	
-	chatmsg ("Now tab is "..index..". AUCTIONATOR_TAB_INDEX = "..AUCTIONATOR_TAB_INDEX);
-
-	if (index == 3) then		
+		if (index == 3) then		
 		Auctionator_ShowElems (auctionsTabElements);
 	end
 	
@@ -140,20 +138,11 @@ function Auctionator_AuctionFrameTab_OnClick (index)
 		forceMsgAreaUpdate = true;
 		
 	elseif (index == AUCTIONATOR_TAB_INDEX) then
-		chatmsg ("Trying to tab to auctionator...");
 		AuctionFrameTab_OnClick(3);
 		
 		
 		PanelTemplates_SetTab(AuctionFrame, AUCTIONATOR_TAB_INDEX);
-		chatmsg (this:GetID ())
 		
-		-- AuctionFrameTopLeft:SetTexture	("");
-		-- AuctionFrameTop:SetTexture		("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-Top");
-		-- AuctionFrameTopRight:SetTexture	("");
-		-- AuctionFrameBotLeft:SetTexture	("Interface\\AuctionFrame\\UI-AuctionFrame-Auction-BotLeft");
-		-- AuctionFrameBot:SetTexture		("");
-		-- AuctionFrameBotRight:SetTexture	("");
-
 		Auctionator_HideElems (auctionsTabElements);
 		
 		Auctionator_HideElems (recommendElements);
@@ -346,12 +335,10 @@ end
 function Auctionator_OnAuctionUpdate ()
 
 	if (processing_state ~= KM_POSTQUERY) then
-		chatmsg ("No KM_POSTQUERY so no Auctionator_OnAuctionUpdate actually");
 		return;
 	end
 	
 	if (PanelTemplates_GetSelectedTab (AuctionFrame) ~= AUCTIONATOR_TAB_INDEX) then
-		chatmsg ("Selected tab !="..AUCTIONATOR_TAB_INDEX.."so no Auctionator_OnAuctionUpdate actually");
 		return;
 	end;
 	
@@ -359,7 +346,7 @@ function Auctionator_OnAuctionUpdate ()
 	
 	local numBatchAuctions, totalAuctions = GetNumAuctionItems("list");
 	
-    chatmsg("auctions:"..numBatchAuctions.." out of  "..totalAuctions)
+    --chatmsg("auctions:"..numBatchAuctions.." out of  "..totalAuctions)
 
 	if (totalAuctions >= 50) then
 		Auctionator_SetMessage ("Scanning auctions: page "..current_page);
@@ -388,8 +375,6 @@ function Auctionator_OnAuctionUpdate ()
 		end
 	end
 
-	chatmsg ("In the center of auction update");
-	
 	if (numBatchAuctions == 50) then
 				
 		processing_state = KM_PREQUERY;	
@@ -428,7 +413,6 @@ function Auctionator_Process_Scandata ()
 	sorteddata = {};
 	
 	if (scandata == nil) then
-		chatmsg ("No scandata to sort");
 		return;
 	end;
    
@@ -436,7 +420,6 @@ function Auctionator_Process_Scandata ()
 
 	local i,sd;
 	local conddata = {};
-	chatmsg ("Processing scandata");
 
 	for i,sd in ipairs (scandata) do
 	
@@ -583,7 +566,6 @@ end
 
 function Auctionator_OnAuctionHouseClosed()
 
-	chatmsg ("AH closed!");
 	AuctionatorOptionsFrame:Hide();
 	AuctionatorDescriptionFrame:Hide();
 	Auctionator_Sell_Template:Hide();
@@ -620,13 +602,10 @@ function Auctionator_Idle(self, elapsed)
 		------- check whether to send a new auction query to get the next page -------
 
 		if (processing_state == KM_PREQUERY) then
-			chatmsg ("KM_PREQUERY...");
 			if (CanSendAuctionQuery()) then
 				processing_state = KM_IN_QUERY;
-				chatmsg ("KM_IN_QUERY...");
 				QueryAuctionItems (currentAuctionItemName, "", "", nil, currentAuctionClass, currentAuctionSubclass, current_page, nil, nil);
 				processing_state = KM_POSTQUERY;
-				chatmsg ("KM_POSTQUERY!");
 				current_page = current_page + 1;
 			end
 		end
@@ -643,9 +622,6 @@ function Auctionator_Idle(self, elapsed)
 
 	if (currentAuctionItemName ~= auctionItemName or currentAuctionStackSize ~= auctionCount or self.NumIdles == 1 or forceMsgAreaUpdate) then
 	
-		if (self.NumIdles == 1) then chatmsg ("self.NumIdles == 1"); end
-		if (forceMsgAreaUpdate) then chatmsg ("forceMsgAreaUpdate"); end
-		
 		forceMsgAreaUpdate = false;
 		
 		sorteddata = {};
@@ -684,7 +660,6 @@ function Auctionator_Idle(self, elapsed)
 		 
 			current_page = 0;
 			processing_state = KM_PREQUERY;
-			chatmsg ("Just KM_PREQUERY in Auctionator_Idle");
 
 			scandata = {};
 		end
@@ -704,7 +679,6 @@ function Auctionator_ScrollbarUpdate()
 	local numrows = table.getn (sorteddata);
 
 	if (numrows == nil) then
-		chatmsg ("numrows set to 0")
 		numrows = 0
 	end
 		
@@ -776,9 +750,7 @@ end
 function AuctionatorMoneyFrame_OnLoad()
 
 	this.small = 1;
-	--this.staticMoney = 0;
 	SmallMoneyFrame_OnLoad();
-	chatmsg ("AuctionatorMoneyFrame_OnLoad");
 	MoneyFrame_SetType("AUCTION");
 end
 
