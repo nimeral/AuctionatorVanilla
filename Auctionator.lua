@@ -774,7 +774,10 @@ end
 function AuctionatorMoneyFrame_OnLoad()
 
 	this.small = 1;
-	MoneyFrame_SetType("STATIC");
+	this.staticMoney = 0;
+	SmallMoneyFrame_OnLoad();
+	chatmsg ("AuctionatorMoneyFrame_OnLoad");
+	MoneyFrame_SetType("AUCTION");
 end
 
 -----------------------------------------
