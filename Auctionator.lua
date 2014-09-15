@@ -314,10 +314,8 @@ function Auctionator_AddSellTab ()
 	--tabButton:SetPoint("TOPLEFT", getglobal("AuctionFrameTab"..(tabIndex - 1)):GetName(), "TOPRIGHT", -8, 0);
 	--tabButton:SetID(tabIndex);
 	
-	PanelTemplates_SetNumTabs (AuctionFrame, 5);
+	PanelTemplates_SetNumTabs (AuctionFrame, n);
 	PanelTemplates_EnableTab  (AuctionFrame, n);
-	--PanelTemplates_SetNumTabs (AuctionFrame, 5);
-	PanelTemplates_EnableTab  (AuctionFrame, 5);
 end
 
 -----------------------------------------
