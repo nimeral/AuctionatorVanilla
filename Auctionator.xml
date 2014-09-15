@@ -611,17 +611,4 @@
 
 	</Frame>
 	
-	<Button name="AuctionFrameTabPost" inherits="AuctionTabTemplate">
-		<Scripts>
-			<OnLoad>
-			setglobal("AuctionFrameTab4", this);
-			this:SetID(4);
-			this:SetParent(AuctionFrame);
-			this:SetText("Auctionator");
-			this:SetPoint("TOPLEFT", getglobal("AuctionFrameTab3"), "TOPRIGHT", -8, 0);
-			this:Show();
-			</OnLoad>
-		</Scripts>
-	</Button>
-	
 </Ui>

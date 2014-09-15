@@ -82,7 +82,6 @@ end
 
 function Auctionator_OnAddonLoaded()
 				
-		chatmsg ("Adding tab & panel...");		
 		Auctionator_AddSellTab ();
 		Auctionator_AddSellPanel ();
 		
@@ -291,12 +290,32 @@ end
 -----------------------------------------
 
 function Auctionator_AddSellTab ()
+		
 	local n = 4;
 	
 	AUCTIONATOR_TAB_INDEX = n;
+
+	local framename = "AuctionFrameTab"..n;
+
+	local frame = CreateFrame("Button", framename, AuctionFrame, "AuctionTabTemplate");
+
+	setglobal("AuctionFrameTab4", frame);
+	frame:SetID(n);
+	--frame:SetParent("FriendsFrameTabTemplate");
+	frame:SetText("Auctionator");
+	frame:SetPoint("LEFT", getglobal("AuctionFrameTab"..n-1), "RIGHT", -8, 0);
+	frame:Show();
+
+	--Attempting to index local 'frame' now
 	
-	PanelTemplates_SetNumTabs (AuctionFrame, 4);
-	PanelTemplates_EnableTab  (AuctionFrame, 4);
+	-- Configure the tab button.
+	--setglobal(AuctionFrameTab4, AuctionFrameTab4);
+	
+	--tabButton:SetPoint("TOPLEFT", getglobal("AuctionFrameTab"..(tabIndex - 1)):GetName(), "TOPRIGHT", -8, 0);
+	--tabButton:SetID(tabIndex);
+	
+	PanelTemplates_SetNumTabs (AuctionFrame, n);
+	PanelTemplates_EnableTab  (AuctionFrame, n);
 end
 
 -----------------------------------------
