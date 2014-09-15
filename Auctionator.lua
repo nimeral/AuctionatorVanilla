@@ -1,6 +1,6 @@
 
-local AuctionatorVersion = "1.0.0";
-local AuctionatorAuthor  = "Zirco";
+local AuctionatorVersion = "1.0.0-Vanilla";
+local AuctionatorAuthor  = "Zirco; Vanilla adaptation by Nimeral";
 
 
 local AuctionatorLoaded = false;
@@ -292,7 +292,7 @@ end
 
 function Auctionator_AddSellTab ()
 		
-	local n = 4;
+	local n = AuctionFrame.numTabs+1;
 	
 	AUCTIONATOR_TAB_INDEX = n;
 

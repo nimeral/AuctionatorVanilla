@@ -372,7 +372,7 @@
 
 		<Layers>
 			<Layer level="BACKGROUND">
-				<FontString name="AuctionatorAuthorText" inherits="GameFontDisableSmall" justifyH="LEFT" justifyV="TOP" text="Author: Zirco">
+				<FontString name="AuctionatorAuthorText" inherits="GameFontDisableSmall" justifyH="LEFT" justifyV="TOP" text="Author: Zirco; Vanilla adaptation by Nimeral">
 					<Anchors>
 						<Anchor point="BOTTOMLEFT">
 							<Offset><AbsDimension x="30" y="20"/></Offset>
