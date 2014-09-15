@@ -33,7 +33,7 @@
 
 
 	<Button name="AuctionatorEntryTemplate" virtual="true" hidden="true">
-		<Size><AbsDimension x="584" y="16" /></Size>		
+		<Size><AbsDimension x="550" y="16" /></Size>		
 		<Frames>
 			<Frame>
 				<Size><AbsDimension x="120" y="16" /></Size>
@@ -101,7 +101,7 @@
 	</Button>
 
 
-	<Frame name="Auctionator_Sell_Template" toplevel="true" hidden = "true" parent = "AuctionFrame">
+	<Frame name="Auctionator_Sell_Template" frameStrata="HIGH" hidden = "true" parent = "AuctionFrame">
 		<Size>
 			<AbsDimension x="548" y="447"/>
 		</Size>
@@ -360,7 +360,7 @@
 	</Frame>
 	
 
-	<Frame name="AuctionatorDescriptionFrame" toplevel="true" parent="UIParent" enableMouse="true" hidden="true">
+	<Frame name="AuctionatorDescriptionFrame" frameStrata="HIGH" toplevel="true" parent="UIParent" enableMouse="true" hidden="true">
 		<Size><AbsDimension x="480" y="480" /></Size>		
 		<Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="-90"/></Offset></Anchor></Anchors>
 
@@ -409,7 +409,7 @@
 	</Frame>
 	
 	
-	<Frame name="AuctionatorOptionsFrame" toplevel="true" parent="UIParent" enableMouse="true" hidden="true">
+	<Frame name="AuctionatorOptionsFrame" frameStrata="HIGH" toplevel="true" parent="UIParent" enableMouse="true" hidden="true">
 		<Size><AbsDimension x="400" y="375" /></Size>		
 		<Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="-170"/></Offset></Anchor></Anchors>
 

@@ -519,6 +519,7 @@ end
 
 function Auctionator_UpdateRecommendation ()
 
+	--AuctionFrame:setTopLevel (false);
 	if (basedata) then
 		local newBuyoutPrice = basedata.itemPrice * currentAuctionStackSize;
 
@@ -774,7 +775,7 @@ end
 function AuctionatorMoneyFrame_OnLoad()
 
 	this.small = 1;
-	this.staticMoney = 0;
+	--this.staticMoney = 0;
 	SmallMoneyFrame_OnLoad();
 	chatmsg ("AuctionatorMoneyFrame_OnLoad");
 	MoneyFrame_SetType("AUCTION");
