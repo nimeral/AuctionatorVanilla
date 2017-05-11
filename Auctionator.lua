@@ -585,15 +585,21 @@ end
 
 -----------------------------------------
 
-function Auctionator_Idle(self, elapsed)
-
-	self.TimeSinceLastUpdate = self.TimeSinceLastUpdate + 0.1;--elapsed;
-	
-	if (AuctionatorMessage == nil) then
-		return;
-	end;
-	
-	self.NumIdles = self.NumIdles + 1;
+function Auctionator_Idle(self, elapsed) 
+ 
+    if (self.TimeSinceLastUpdate == nil) then 
+        self.TimeSinceLastUpdate = 0; 
+    end; 
+    self.TimeSinceLastUpdate = self.TimeSinceLastUpdate + 0.1;--elapsed; 
+     
+    if (AuctionatorMessage == nil) then 
+        return; 
+    end; 
+     
+    if (self.NumIdles == nil) then 
+        self.NumIdles = 0; 
+    end; 
+    self.NumIdles = self.NumIdles + 1;
 	
 	if (self.TimeSinceLastUpdate > 0.25) then
 	
