@@ -25,7 +25,7 @@
         Auctionator_OnUpdate(self, elapsed);
       </OnUpdate>
       <OnEvent> 
-            Auctionator_EventHandler();
+        Auctionator_EventHandler();
       </OnEvent>
     </Scripts>
   </Frame>
@@ -159,14 +159,14 @@
   </Button>
 
 
-  <Frame name="Auctionator_Sell_Template" frameStrata="HIGH" hidden = "true" parent = "AuctionFrame">
+  <Frame name="Auctionator_Sell_Template" frameStrata="HIGH" hidden="true" parent="UIParent">
     <Size>
       <AbsDimension x="548" y="447"/>
     </Size>
     <Anchors>
       <Anchor point="TOPLEFT">
         <Offset>
-          <AbsDimension x="210" y="0"/>
+          <AbsDimension x="210" y="-140"/>
         </Offset>
       </Anchor>
     </Anchors>
@@ -201,7 +201,7 @@
           <Anchors>
             <Anchor point="TOPLEFT">
               <Offset>
-                <AbsDimension x="8" y="-50"/>
+                <AbsDimension x="8" y="-70"/>
               </Offset>
             </Anchor>
           </Anchors>
@@ -494,7 +494,7 @@
         <Anchors>
           <Anchor point="RIGHT">
             <Offset>
-              <AbsDimension x="-14" y="-302"/>
+              <AbsDimension x="-14" y="-163"/>
             </Offset>
           </Anchor>
         </Anchors>
@@ -619,7 +619,7 @@
       <AbsDimension x="480" y="480" />
     </Size>
     <Anchors>
-      <Anchor point="TOP">
+      <Anchor point="TOPLEFT">
         <Offset>
           <AbsDimension x="0" y="-90"/>
         </Offset>
@@ -628,7 +628,8 @@
 
     <Backdrop bgFile="Interface\CharacterFrame\UI-Party-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
       <BackgroundInsets>
-        <AbsInset left="11" right="12" top="12" bottom="11"/>
+        <!--<AbsInset left="11" right="12" top="12" bottom="11"/>-->
+
       </BackgroundInsets>
       <TileSize>
         <AbsValue val="32"/>
