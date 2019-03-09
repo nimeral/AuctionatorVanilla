@@ -323,12 +323,12 @@
 
       <Button>
         <Size>
-          <AbsDimension y="118" />
+          <AbsDimension y="180" />
         </Size>
         <Anchors>
           <Anchor point="TOPLEFT">
             <Offset>
-              <AbsDimension x="5" y="-2"/>
+              <AbsDimension x="5" y="-4"/>
             </Offset>
           </Anchor>
           <Anchor point="RIGHT">
