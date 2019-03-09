@@ -688,9 +688,9 @@ function Auctionator_ScrollbarUpdate()
         numrows = 0
     end
         
-    FauxScrollFrame_Update (AuctionatorScrollFrame, numrows, 12, 16);
+    FauxScrollFrame_Update (AuctionatorScrollFrame, numrows, 10, 16);
 
-    for line = 1,12 do
+    for line = 1,10 do
 
         dataOffset = line + FauxScrollFrame_GetOffset (AuctionatorScrollFrame);
         

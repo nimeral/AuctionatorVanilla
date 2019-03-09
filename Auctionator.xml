@@ -508,7 +508,7 @@
 
       <ScrollFrame name="AuctionatorScrollFrame" inherits="FauxScrollFrameTemplate">
         <Size>
-          <AbsDimension x="588" y="196"/>
+          <AbsDimension x="588" y="160"/>
         </Size>
         <Anchors>
           <Anchor point="TOPLEFT">
