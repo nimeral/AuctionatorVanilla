@@ -163,15 +163,14 @@ end
 -----------------------------------------
 
 
-function Auctionator_ContainerFrameItemButton_OnModifiedClick (button)
+function Auctionator_ContainerFrameItemButton_OnClick (button)
     
-    if (	AUCTIONATOR_ENABLE_ALT == 0
+    if (button ~= 'LeftButton' or AUCTIONATOR_ENABLE_ALT == 0
         or  not	AuctionFrame:IsShown()
         or	not	IsAltKeyDown())
     then
-        return auctionator_orig_ContainerFrameItemButton_OnModifiedClick (button);
+        return auctionator_orig_ContainerFrameItemButton_OnClick (button);
     end;
-
     if (PanelTemplates_GetSelectedTab (AuctionFrame) ~= AUCTIONATOR_TAB_INDEX) then
     
         AuctionFrameTab_OnClick (AUCTIONATOR_TAB_INDEX);
@@ -181,12 +180,9 @@ function Auctionator_ContainerFrameItemButton_OnModifiedClick (button)
     
     PickupContainerItem(this:GetParent():GetID(), this:GetID());
 
-    local infoType = GetCursorInfo()
 
-    if (infoType == "item") then
-        ClickAuctionSellItemButton();
-        ClearCursor();
-    end
+    ClickAuctionSellItemButton();
+    ClearCursor();
 
 end
 
@@ -254,9 +250,9 @@ function Auctionator_SetupHookFunctions ()
     auctionator_orig_AuctionFrameTab_OnClick = AuctionFrameTab_OnClick;
     AuctionFrameTab_OnClick = Auctionator_AuctionFrameTab_OnClick;
     
-    auctionator_orig_ContainerFrameItemButton_OnModifiedClick = ContainerFrameItemButton_OnModifiedClick;
-    ContainerFrameItemButton_OnModifiedClick = Auctionator_ContainerFrameItemButton_OnModifiedClick;
-    
+    auctionator_orig_ContainerFrameItemButton_OnClick = ContainerFrameItemButton_OnClick;
+    ContainerFrameItemButton_OnClick = Auctionator_ContainerFrameItemButton_OnClick;
+        
     auctionator_orig_AuctionFrameAuctions_Update = AuctionFrameAuctions_Update;
     AuctionFrameAuctions_Update = Auctionator_AuctionFrameAuctions_Update;
     
