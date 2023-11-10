@@ -32,6 +32,7 @@ local forceMsgAreaUpdate = false;
 
 local scandata;
 local sorteddata = {};
+local savedscandata = {};
 local basedata;
 
 local currentAuctionItemName = "";
@@ -333,6 +334,13 @@ end
 -----------------------------------------
 
 function Auctionator_OnAuctionUpdate ()
+    if (savedscandata ~= nil and savedscandata[currentAuctionItemName] ~= nil) then
+        scandata = savedscandata[currentAuctionItemName];
+        Auctionator_Process_Scandata ();
+        Auctionator_CalcBaseData();
+        processing_state = KM_NULL_STATE;
+        return;
+    end
 
     if (processing_state ~= KM_POSTQUERY) then
         return;
@@ -383,6 +391,7 @@ function Auctionator_OnAuctionUpdate ()
     
         if (table.getn (scandata) > 0) then
             Auctionator_Process_Scandata ();
+            savedscandata[currentAuctionItemName] = scandata
             Auctionator_CalcBaseData();
         else
             Auctionator_SetMessage ("No auctions were found for \n\n"..currentAuctionItemName);
@@ -569,6 +578,7 @@ function Auctionator_OnAuctionHouseClosed()
     AuctionatorOptionsFrame:Hide();
     AuctionatorDescriptionFrame:Hide();
     Auctionator_Sell_Template:Hide();
+    savedscandata = {}
     
 end
 
